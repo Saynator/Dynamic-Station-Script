@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationScriptManagingSystem", "StationScriptManagingSystem.csproj", "{43369154-FAAC-4C50-8876-210C32F580E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationScriptCargo", "..\StationScriptCargo\StationScriptCargo.csproj", "{F8C73238-CDD6-4D93-8F2F-7B10C80C8790}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43369154-FAAC-4C50-8876-210C32F580E7}.Debug|x64.ActiveCfg = Debug|x64
+		{43369154-FAAC-4C50-8876-210C32F580E7}.Debug|x64.Build.0 = Debug|x64
+		{F8C73238-CDD6-4D93-8F2F-7B10C80C8790}.Debug|x64.ActiveCfg = Debug|x64
+		{F8C73238-CDD6-4D93-8F2F-7B10C80C8790}.Debug|x64.Build.0 = Debug|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF5CA948-8A6E-48B4-BD52-539F9659C499}
+	EndGlobalSection
+EndGlobal
