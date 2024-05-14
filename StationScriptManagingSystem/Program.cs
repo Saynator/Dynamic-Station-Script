@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Sandbox.Game.EntityComponents;
+using Sandbox.Game.World;
 using Sandbox.ModAPI.Ingame;
 using Sandbox.ModAPI.Interfaces;
 using SpaceEngineers.Game.ModAPI.Ingame;
@@ -79,15 +80,17 @@ namespace IngameScript
         public class Instruction
         {
             public string Type { get; set; }
+            public List<Instruction> DataInstructions { get; set; }
             public List<MyItemType> Data1 { get; set; }
             public List<IMyInventoryOwner> Data2 { get; set; }
             public string DataString { get; set; }
+            public object DataObject { get; set; }
         }
 
 
 
         UpdateType updateSource;
-        bool _mainScriptManager = true;
+        bool _mainScriptManager = true; //Not implemented
         public Program()
         {
             _commands["Update"] = Update;
@@ -126,40 +129,49 @@ namespace IngameScript
                 Instruction = new Instruction
                 {
                     Type = "Return",
+                    DataString = ""
                 }
             }, pb);
         }
 
         private void LocalEcho()
         {
-            Echo($"Incoming Echo from {_commandLine.Argument(1)}({_commandLine.Argument(0)}):\n{_commandLine.Argument(4)}");
+            string sender = GridTerminalSystem.GetBlockWithId(long.Parse(_commandLine.Argument(1))).Name; //gets the sender
+            Echo($"Incoming Echo from {sender}({_commandLine.Argument(0)}):\n{_commandLine.Argument(3)}");
         }
 
         public void Save()
-        {
+        { 
             Storage = "";
         }
 
         public void Main(string argument, UpdateType updateSource)
         {
             this.updateSource = updateSource;
-            if (_commandLine.TryParse(argument)){
-                if (!_commandLine.Switch("isCommand")) { Echo("This ain't a command bruv");  return; }
-                Action action;
-                string command = _commandLine.Argument(2);
-                if (command == null)
-                {
-                    Echo("No command specified");
-                }
-                else if (_commands.TryGetValue(command, out action))
-                { 
-                    action();
-                }
-                else
-                {
-                    Echo($"Unknown command {command}");
-                }
-                _commandLine.Clear();
+            switch (updateSource)
+            {
+                case UpdateType.Script:
+                    if (_commandLine.TryParse(argument)) {
+                        if (!_commandLine.Switch("isCommand")) { Echo("This ain't a command bruv"); return; }
+                        Action action;
+                        string command = _commandLine.Argument(2);
+                        if (command == null)
+                        {
+                            Echo("No command specified");
+                        }
+                        else if (_commands.TryGetValue(command, out action))
+                        {
+                            action();
+                        }
+                        else
+                        {
+                            Echo($"Unknown command {command}");
+                        }
+                    }
+                    break;
+                case UpdateType.Once:
+                    Request();
+                    break;
             }
         }
         private void Display()
