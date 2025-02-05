@@ -6,7 +6,7 @@ This is *Version 0.1* by ***Saynator***
 
 ## Idea ##
 
-The dynamic station scripts (DSS) is a script pack which spreads over multiple programmable blocks who can communicate with each other through commands.
+The dynamic station scripts (DSS) is a script pack which spreads over multiple programmable blocks that can communicate with each other through commands.
 The advantages of this are:
 
 - The Script has no character limit as modifications and complex scripts are spread out through multiple programmable blocks
